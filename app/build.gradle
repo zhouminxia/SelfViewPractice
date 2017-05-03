@@ -25,5 +25,4 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.0.3'
     compile 'cn.yipianfengye.android:zxing-library:2.1'
     compile project(path: ':timeselector')
-    compile project(path: ':daemonlibrary')
 }
