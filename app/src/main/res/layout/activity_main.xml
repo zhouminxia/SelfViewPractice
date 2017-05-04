@@ -69,6 +69,7 @@
         android:layout_marginLeft="10dp"
         android:onClick="click"
         android:text="箭头跟着走" />
+
     <Button
         android:id="@+id/path_one"
         android:layout_width="wrap_content"
@@ -77,6 +78,7 @@
         android:layout_marginLeft="10dp"
         android:onClick="click"
         android:text="搜索动态" />
+
     <Button
         android:id="@+id/path_one_me"
         android:layout_width="wrap_content"
@@ -85,5 +87,14 @@
         android:layout_marginLeft="10dp"
         android:onClick="click"
         android:text="搜索动态me" />
+
+    <Button
+        android:id="@+id/zoom_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:onClick="click"
+        android:text="自动缩放Imageview" />
 
 </LinearLayout>

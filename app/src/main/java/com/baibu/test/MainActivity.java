@@ -50,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent8 = new Intent(MainActivity.this, PathViewOneMeActivity.class);
                 startActivity(intent8);
                 break;
+            case R.id.zoom_imageview:
+                Intent intent9 = new Intent(MainActivity.this, ZoomImageActivity.class);
+                startActivity(intent9);
+                break;
         }
     }
 
