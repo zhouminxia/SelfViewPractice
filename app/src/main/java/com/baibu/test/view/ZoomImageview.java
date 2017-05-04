@@ -128,10 +128,10 @@ public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGloba
     public boolean onScale(ScaleGestureDetector detector) {
         if (getDrawable() == null) return true;
 
-//        float scaleFactor = detector.getScaleFactor();
-        float scaleFactor = mScale;
+        float scaleFactor = detector.getScaleFactor();
         float currentScale = getCurrentScale();
-
+//        float currentScale = mScale;
+        System.out.println("--scaleFactor * currentScale=" + scaleFactor * currentScale+"<scaleFactor="+scaleFactor+",mMaxScale="+mMaxScale+",mIniScale="+mIniScale);
         if ((scaleFactor > 1.0f && scaleFactor * currentScale < mMaxScale) || scaleFactor < 1.0f && scaleFactor * currentScale > mIniScale) {
 
             if (scaleFactor * currentScale < mIniScale) {
@@ -140,11 +140,11 @@ public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGloba
             if (scaleFactor * currentScale > mMaxScale) {
                 scaleFactor = mMaxScale / currentScale;
             }
+
+            System.out.println("--sc2scaleFactor="+scaleFactor);
+            mMatrix.postScale(scaleFactor, scaleFactor, getWidth() / 2, getHeight() / 2);
+            setImageMatrix(mMatrix);
         }
-
-        mMatrix.postScale(scaleFactor, scaleFactor, getWidth() / 2, getHeight() / 2);
-        setImageMatrix(mMatrix);
-
         return true;
     }
 
