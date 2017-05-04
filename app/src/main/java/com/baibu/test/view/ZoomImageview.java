@@ -10,6 +10,9 @@ import android.widget.ImageView;
 /**
  * Created by minna_Zhou on 2017/5/4.
  * 可以自动缩放的imageview
+ * <p/>
+ * 1.图片居中缩放；布局里面控件设置为全Matchparent，图片src自动居中缩放。
+ * 2.多指缩放。
  */
 public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGlobalLayoutListener {
 
