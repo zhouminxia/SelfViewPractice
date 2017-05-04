@@ -7,5 +7,5 @@
     <com.baibu.test.view.ZoomImageview
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/run_128" />
+        android:src="@drawable/ic_launcher1" />
 </LinearLayout>
