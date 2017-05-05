@@ -7,5 +7,12 @@
     <com.baibu.test.view.ZoomImageview
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/brighton" />
+        android:scaleType="matrix"
+        android:src="@drawable/icon_64" />
+
+    <!--<ImageView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:scaleType="matrix"-->
+    <!--android:src="@drawable/icon_64" />-->
 </LinearLayout>
