@@ -5,6 +5,7 @@ import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
@@ -37,6 +38,7 @@ public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGloba
     private float mPointerCount;//最后的手指触摸点数量
     private int mScaledTouchSlop;//可以叫做滚动action的px值
     private boolean mCanMove;//是否叫做移动的
+    private GestureDetector mGestureDetector;//双击
 
     public ZoomImageview(Context context) {
         this(context, null);
@@ -59,6 +61,25 @@ public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGloba
         setOnTouchListener(this);
         //Distance in pixels a touch can wander before we think the user is scrolling
         mScaledTouchSlop = ViewConfiguration.get(mContext).getScaledTouchSlop();
+
+        mGestureDetector = new GestureDetector(mContext, new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public boolean onDoubleTap(MotionEvent e) {//双击
+
+                float x = e.getX();
+                float y = e.getY();
+
+                if (getCurrentScale() < mMidScale) {
+                    mMatrix.postScale(mMidScale / getCurrentScale(), mMidScale / getCurrentScale(), x, y);
+                    setImageMatrix(mMatrix);
+                } else {
+                    mMatrix.postScale(mIniScale / getCurrentScale(), mIniScale / getCurrentScale(), x, y);
+                    setImageMatrix(mMatrix);
+                }
+
+                return true;
+            }
+        });
     }
 
     @Override
@@ -259,8 +280,11 @@ public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGloba
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        mScaleGestureDetector.onTouchEvent(event);
+        if (mGestureDetector.onTouchEvent(event)) {//如果双击事件处理的话，直接消费掉
+            return true;
+        }
 
+        mScaleGestureDetector.onTouchEvent(event);
 
         int pointerCount = event.getPointerCount();
         //多点触碰的中心x y 坐标
