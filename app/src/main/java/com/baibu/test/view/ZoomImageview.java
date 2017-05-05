@@ -70,16 +70,58 @@ public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGloba
                 float y = e.getY();
 
                 if (getCurrentScale() < mMidScale) {
-                    mMatrix.postScale(mMidScale / getCurrentScale(), mMidScale / getCurrentScale(), x, y);
-                    setImageMatrix(mMatrix);
+//                    mMatrix.postScale(mMidScale / getCurrentScale(), mMidScale / getCurrentScale(), x, y);
+//                    setImageMatrix(mMatrix);
+                    postDelayed(new AutoZoomRunnable(mMidScale / getCurrentScale(), x, y), 1);
                 } else {
-                    mMatrix.postScale(mIniScale / getCurrentScale(), mIniScale / getCurrentScale(), x, y);
-                    setImageMatrix(mMatrix);
+//                    mMatrix.postScale(mIniScale / getCurrentScale(), mIniScale / getCurrentScale(), x, y);
+//                    setImageMatrix(mMatrix);
+                    postDelayed(new AutoZoomRunnable(mIniScale / getCurrentScale(), x, y), 1);
                 }
 
                 return true;
             }
         });
+    }
+
+    /**
+     * 自动缩放
+     */
+    private class AutoZoomRunnable implements Runnable {
+        private float targetScaleValue;
+        private float scaleX;
+        private float scaleY;
+        private float mScaleValue = 1.0f;
+        private float SCALE_LARGE = 1.1F;
+        private float SCALE_SMALL = 0.9F;
+
+        public AutoZoomRunnable(float targetScaleValue, float scaleX, float scaleY) {
+            this.targetScaleValue = targetScaleValue;
+            this.scaleX = scaleX;
+            this.scaleY = scaleY;
+            mScaleValue = getCurrentScale() < targetScaleValue ? SCALE_SMALL : SCALE_LARGE;
+        }
+
+        @Override
+        public void run() {
+            mMatrix.postScale(mScaleValue, mScaleValue, scaleX, scaleY);
+            fixBorderBlank();
+            setImageMatrix(mMatrix);
+
+
+            //时刻修正
+            float currentScale = getCurrentScale();
+
+            if ((mScaleValue > 1.0f && currentScale < targetScaleValue) || mScaleValue < 1.0f && currentScale < targetScaleValue) {
+                //未达到最大值
+                postDelayed(this, 10);
+            } else {
+                //达到最大值
+                mMatrix.postScale(targetScaleValue / currentScale, targetScaleValue / currentScale, scaleX, scaleY);
+                fixBorderBlank();
+                setImageMatrix(mMatrix);
+            }
+        }
     }
 
     @Override
