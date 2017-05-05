@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -31,6 +32,11 @@ public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGloba
     private float mScale;//第一次缩放的
     private int mViewWidth;
     private int mViewHeight;
+    private float mLastPointerX;//最后一次触摸点的x
+    private float mLastPointerY;//最后一次触摸点的y
+    private float mPointerCount;//最后的手指触摸点数量
+    private int mScaledTouchSlop;//可以叫做滚动action的px值
+    private boolean mCanMove;//是否叫做移动的
 
     public ZoomImageview(Context context) {
         this(context, null);
@@ -51,6 +57,8 @@ public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGloba
         setScaleType(ScaleType.MATRIX);//不知道为什么设置这句话后，图片就变小了
         mScaleGestureDetector = new ScaleGestureDetector(mContext, this);
         setOnTouchListener(this);
+        //Distance in pixels a touch can wander before we think the user is scrolling
+        mScaledTouchSlop = ViewConfiguration.get(mContext).getScaledTouchSlop();
     }
 
     @Override
@@ -252,6 +260,61 @@ public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGloba
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         mScaleGestureDetector.onTouchEvent(event);
+
+
+        int pointerCount = event.getPointerCount();
+        //多点触碰的中心x y 坐标
+        float centerX = 0;
+        float centerY = 0;
+        for (int i = 0; i < pointerCount; i++) {
+            centerX += event.getX(i);
+            centerY += event.getY(i);
+        }
+
+        centerX /= pointerCount;
+        centerY /= pointerCount;
+
+
+        //触摸点数量改变
+        if (mPointerCount != pointerCount) {
+            mPointerCount = pointerCount;
+            mLastPointerX = centerX;
+            mLastPointerY = centerY;
+        }
+
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_MOVE:
+
+                float offsetX = centerX - mLastPointerX;
+                float offsetY = centerY - mLastPointerY;
+
+                if (!mCanMove) {//不叫移动
+                    mCanMove = canMove(offsetX, offsetY);
+                } else {//叫移动
+                    if (!isDrawableNull()) {
+                        mMatrix.postTranslate(offsetX, offsetY);
+                        fixBorderBlank();
+                        setImageMatrix(mMatrix);
+                    }
+                }
+                break;
+            case MotionEvent.ACTION_CANCEL:
+            case MotionEvent.ACTION_UP:
+                mPointerCount = 0;
+                break;
+        }
         return true;
+    }
+
+    /**
+     * 根据xy偏移量 判断是否能够移动
+     *
+     * @param offsetX
+     * @param offsetY
+     * @return
+     */
+    private boolean canMove(float offsetX, float offsetY) {
+
+        return Math.sqrt(offsetX * offsetX + offsetY * offsetY) > mScaledTouchSlop;
     }
 }
