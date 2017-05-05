@@ -80,9 +80,12 @@ public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGloba
             int intrinsicHeight = drawable.getIntrinsicHeight();
 
             mScale = 1;
+
+            //用大的除以小的，获得放大比例；用小的除以大的，获得缩小比例
+
             //intrinsicWidth大，intrinsicHeight大
             if (intrinsicHeight > mViewHeight && intrinsicWidth > mViewWidth) {
-                mScale = Math.min(intrinsicHeight * 1.0f / mViewHeight, intrinsicWidth * 1.0f / mViewWidth);
+                mScale = Math.min(mViewHeight * 1.0f / intrinsicHeight, mViewWidth * 1.0f / intrinsicWidth);
             }
             //intrinsicWidth小，intrinsicHeight小
             if (intrinsicHeight < mViewHeight && intrinsicWidth < mViewWidth) {
@@ -140,7 +143,8 @@ public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGloba
             if (scaleFactor * currentScale > mMaxScale) {
                 scaleFactor = mMaxScale / currentScale;
             }
-            mMatrix.postScale(scaleFactor, scaleFactor, mViewWidth / 2, mViewHeight / 2);
+//            mMatrix.postScale(scaleFactor, scaleFactor, mViewWidth / 2, mViewHeight / 2);
+            mMatrix.postScale(scaleFactor, scaleFactor, detector.getFocusX(), detector.getFocusY());
             setImageMatrix(mMatrix);
         }
         return true;
