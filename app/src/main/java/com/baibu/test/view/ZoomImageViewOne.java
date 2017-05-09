@@ -85,7 +85,7 @@ public class ZoomImageViewOne extends ImageView implements ViewTreeObserver.OnGl
  * 我们双击直接到变为原图的2倍；如果是2,4之间的，
  * 我们双击直接为原图的4倍；其他状态也就是4倍，双击后还原到最初的尺寸。
  */
-                System.out.println("--getCurrentScale()="+getCurrentScale()+",mMidScale"+mMidScale);
+                System.out.println("--getCurrentScale()=" + getCurrentScale() + ",mMidScale" + mMidScale);
 
                 //如果当前的缩放值小于4倍，就放大到4倍；
                 if (getCurrentScale() < mMidScale) {
@@ -390,7 +390,22 @@ public class ZoomImageViewOne extends ImageView implements ViewTreeObserver.OnGl
         mPointerCount = pointerCount;
 
         switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                //当高宽大于屏幕时，拦截事件，告诉父亲，不要拦截
+                RectF matrxRectF1 = getMatrxRectF();
+                if (matrxRectF1.height() > getHeight() || matrxRectF1.width() > getWidth()) {
+                    getParent().requestDisallowInterceptTouchEvent(true);
+                }
+
+                break;
             case MotionEvent.ACTION_MOVE:
+
+                //当高宽大于屏幕时，拦截事件，告诉父亲，不要拦截
+                RectF matrxRectF = getMatrxRectF();
+                if (matrxRectF.height() > getHeight() || matrxRectF.width() > getWidth()) {
+                    getParent().requestDisallowInterceptTouchEvent(true);
+                }
+
 
                 float offsetX = centerX - mLastPointerX;
                 float offsetY = centerY - mLastPointerY;
@@ -402,6 +417,15 @@ public class ZoomImageViewOne extends ImageView implements ViewTreeObserver.OnGl
                 if (mCanMove) {
                     RectF rectF = getMatrxRectF();
                     if (getDrawable() != null) {
+                        //当缩放到达屏幕边边上时,还在向左或向右拉，告诉父亲，我不拦截了，你去处理
+                        RectF matrxRectF2 = getMatrxRectF();
+                        if (matrxRectF2.left == 0 && offsetX > 0) {
+                            getParent().requestDisallowInterceptTouchEvent(false);
+                        }
+
+                        if (matrxRectF2.right == getWidth() && offsetX < 0) {
+                            getParent().requestDisallowInterceptTouchEvent(false);
+                        }
                         isCheckLeftAndRight = isCheckTopAndBottom = true;
                         // 如果宽度小于屏幕宽度，则禁止左右移动
                         if (rectF.width() < getWidth()) {
@@ -420,6 +444,8 @@ public class ZoomImageViewOne extends ImageView implements ViewTreeObserver.OnGl
                 }
                 mLastPointerX = centerX;
                 mLastPointerY = centerY;
+
+
                 break;
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
