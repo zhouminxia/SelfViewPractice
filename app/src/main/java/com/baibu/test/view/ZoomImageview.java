@@ -233,7 +233,6 @@ public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGloba
             //3.时时来修正图片，设置图片偏移量，不要留白
             fixBorderBlank();
 
-
             setImageMatrix(mMatrix);
         }
         return true;
@@ -256,32 +255,32 @@ public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGloba
         float deltaY = 0;//Y轴的偏移量
 
         //水平方向的
-        if (picWidth >= mViewWidth) {//大于宽度
+        if (picWidth >=  getWidth()) {//大于宽度
             //左边留白
             if (rectF.left > 0) {
                 deltaX = -rectF.left;
             }
             //右边留白
-            if (mViewWidth - rectF.right > 0) {
-                deltaX = mViewWidth - rectF.right;
+            if ( getWidth() - rectF.right > 0) {
+                deltaX =  getWidth() - rectF.right;
             }
         } else {//小于宽度
             //居中
-            deltaX = mViewWidth / 2 - (rectF.right - picWidth / 2);
+            deltaX = getWidth() / 2 - (rectF.right - picWidth / 2);
         }
 
         //垂直方向的
-        if (picHeight >= mViewHeight) {
+        if (picHeight >=  getHeight()) {
             //上面留白
             if (rectF.top > 0) {
                 deltaY = -rectF.top;
             }
             //下面留白
-            if (mViewHeight - rectF.bottom > 0) {
-                deltaY = mViewHeight - rectF.bottom;
+            if (getHeight() - rectF.bottom > 0) {
+                deltaY = getHeight() - rectF.bottom;
             }
         } else {
-            deltaY = mViewHeight / 2 - (rectF.bottom - picHeight / 2);
+            deltaY = getHeight()/ 2 - (rectF.bottom - picHeight / 2);
         }
         mMatrix.postTranslate(deltaX, deltaY);
     }
@@ -366,13 +365,13 @@ public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGloba
                     if (!isDrawableNull()) {
                         isCheckLeftAndRight = isCheckTopAndBottom = true;
                         //如果宽度小于控件宽度，不允许横向移动
-                        if (matrxRectF.width() < mViewWidth) {
+                        if (matrxRectF.width() < getWidth()) {
                             offsetX = 0;
                             isCheckLeftAndRight = false;
                         }
 
                         //如果高度小于控件高度，不允许纵向移动
-                        if (matrxRectF.height() < mViewHeight) {
+                        if (matrxRectF.height() < getHeight()) {
                             offsetY = 0;
                             isCheckTopAndBottom = false;
                         }
@@ -406,8 +405,8 @@ public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGloba
             deltaY = -matrxRectF.top;
         }
         //底部留白
-        if (matrxRectF.bottom < mViewHeight && isCheckTopAndBottom) {
-            deltaY = mViewHeight - matrxRectF.bottom;
+        if (matrxRectF.bottom <  getHeight()  && isCheckTopAndBottom) {
+            deltaY = getHeight() - matrxRectF.bottom;
         }
 
         //左边留白
@@ -416,8 +415,8 @@ public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGloba
         }
 
         //右边留白
-        if (matrxRectF.right < mViewWidth && isCheckLeftAndRight) {
-            deltaX = mViewWidth - matrxRectF.right;
+        if (matrxRectF.right <  getWidth()  && isCheckLeftAndRight) {
+            deltaX = getWidth() - matrxRectF.right;
         }
 
         mMatrix.postTranslate(deltaX, deltaY);
