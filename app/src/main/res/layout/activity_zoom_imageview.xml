@@ -4,11 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.baibu.test.view.ZoomImageview
+    <com.baibu.test.view.ZoomImageViewOne
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="matrix"
-        android:src="@drawable/icon_128" />
+        android:src="@drawable/brighton" />
 
     <!--<ImageView-->
     <!--android:layout_width="match_parent"-->
