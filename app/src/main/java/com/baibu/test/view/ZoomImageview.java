@@ -35,10 +35,15 @@ public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGloba
     private int mViewHeight;
     private float mLastPointerX;//最后一次触摸点的x
     private float mLastPointerY;//最后一次触摸点的y
-    private float mPointerCount;//最后的手指触摸点数量
+    private float mLastPointerCount;//最后的手指触摸点数量
     private int mScaledTouchSlop;//可以叫做滚动action的px值
     private boolean mCanMove;//是否叫做移动的
     private GestureDetector mGestureDetector;//双击
+
+    private boolean isCheckLeftAndRight;
+    private boolean isCheckTopAndBottom;
+
+    private boolean isAutoScale = false;
 
     public ZoomImageview(Context context) {
         this(context, null);
@@ -56,7 +61,7 @@ public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGloba
     private void init(Context context) {
         mContext = context;
         mMatrix = new Matrix();
-        setScaleType(ScaleType.MATRIX);//不知道为什么设置这句话后，图片就变小了
+        setScaleType(ScaleType.MATRIX);
         mScaleGestureDetector = new ScaleGestureDetector(mContext, this);
         setOnTouchListener(this);
         //Distance in pixels a touch can wander before we think the user is scrolling
@@ -65,7 +70,9 @@ public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGloba
         mGestureDetector = new GestureDetector(mContext, new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onDoubleTap(MotionEvent e) {//双击
-
+                if (isAutoScale) {
+                    return true;
+                }
                 float x = e.getX();
                 float y = e.getY();
 
@@ -92,8 +99,8 @@ public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGloba
         private float scaleX;
         private float scaleY;
         private float mScaleValue = 1.0f;
-        private float SCALE_LARGE = 1.1F;
-        private float SCALE_SMALL = 0.9F;
+        private float SCALE_LARGE = 1.07f;
+        private float SCALE_SMALL = 0.93f;
 
         public AutoZoomRunnable(float targetScaleValue, float scaleX, float scaleY) {
             this.targetScaleValue = targetScaleValue;
@@ -104,22 +111,23 @@ public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGloba
 
         @Override
         public void run() {
-            mMatrix.postScale(mScaleValue, mScaleValue, scaleX, scaleY);
+            isAutoScale = true;
             fixBorderBlank();
+            mMatrix.postScale(mScaleValue, mScaleValue, scaleX, scaleY);
             setImageMatrix(mMatrix);
-
 
             //时刻修正
             float currentScale = getCurrentScale();
 
             if ((mScaleValue > 1.0f && currentScale < targetScaleValue) || mScaleValue < 1.0f && currentScale < targetScaleValue) {
-                //未达到最大值
+                //要再次执行本run方法
                 postDelayed(this, 10);
             } else {
-                //达到最大值
-                mMatrix.postScale(targetScaleValue / currentScale, targetScaleValue / currentScale, scaleX, scaleY);
+                //达到最大值,或者比目标值大
                 fixBorderBlank();
+                mMatrix.postScale(targetScaleValue / currentScale, targetScaleValue / currentScale, scaleX, scaleY);
                 setImageMatrix(mMatrix);
+                isAutoScale = false;
             }
         }
     }
@@ -216,14 +224,15 @@ public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGloba
                 scaleFactor = mMaxScale / currentScale;
             }
 
-            //永远以屏幕中心进行缩放
+            //1.永远以屏幕中心进行缩放
 //            mMatrix.postScale(scaleFactor, scaleFactor, mViewWidth / 2, mViewHeight / 2);
+
 
             //以触摸点来进行缩放，但是有问题：会留白
             mMatrix.postScale(scaleFactor, scaleFactor, detector.getFocusX(), detector.getFocusY());
-
-            //时时来修正图片，设置图片偏移量，不要留白
+            //3.时时来修正图片，设置图片偏移量，不要留白
             fixBorderBlank();
+
 
             setImageMatrix(mMatrix);
         }
@@ -235,7 +244,6 @@ public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGloba
      * 思路：分别判断水平和垂直方向的留白部分，进行修正
      */
     private void fixBorderBlank() {
-
 
         if (isDrawableNull()) {
             return;
@@ -275,9 +283,7 @@ public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGloba
         } else {
             deltaY = mViewHeight / 2 - (rectF.bottom - picHeight / 2);
         }
-
         mMatrix.postTranslate(deltaX, deltaY);
-
     }
 
     /**
@@ -322,10 +328,7 @@ public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGloba
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        if (mGestureDetector.onTouchEvent(event)) {//如果双击事件处理的话，直接消费掉
-            return true;
-        }
-
+//        mGestureDetector.onTouchEvent(event);//如果双击事件处理的话，直接消费掉
         mScaleGestureDetector.onTouchEvent(event);
 
         int pointerCount = event.getPointerCount();
@@ -342,34 +345,82 @@ public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGloba
 
 
         //触摸点数量改变
-        if (mPointerCount != pointerCount) {
-            mPointerCount = pointerCount;
+        if (mLastPointerCount != pointerCount) {
+            mCanMove = false;
+            mLastPointerCount = pointerCount;
             mLastPointerX = centerX;
             mLastPointerY = centerY;
         }
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_MOVE:
-
+                Toast.makeText(mContext, "ACTION_MOVE", Toast.LENGTH_SHORT).show();
                 float offsetX = centerX - mLastPointerX;
                 float offsetY = centerY - mLastPointerY;
 
                 if (!mCanMove) {//不叫移动
                     mCanMove = canMove(offsetX, offsetY);
-                } else {//叫移动
+                }
+                if (mCanMove) {
+                    RectF matrxRectF = getMatrxRectF();
                     if (!isDrawableNull()) {
+                        isCheckLeftAndRight = isCheckTopAndBottom = true;
+                        //如果宽度小于控件宽度，不允许横向移动
+                        if (matrxRectF.width() < mViewWidth) {
+                            offsetX = 0;
+                            isCheckLeftAndRight = false;
+                        }
+
+                        //如果高度小于控件高度，不允许纵向移动
+                        if (matrxRectF.height() < mViewHeight) {
+                            offsetY = 0;
+                            isCheckTopAndBottom = false;
+                        }
                         mMatrix.postTranslate(offsetX, offsetY);
-                        fixBorderBlank();
+                        fixBorderWhenTranslate();
                         setImageMatrix(mMatrix);
                     }
                 }
+                mLastPointerX = centerX;
+                mLastPointerY = centerY;
                 break;
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
-                mPointerCount = 0;
+                mLastPointerCount = 0;
                 break;
         }
         return true;
+    }
+
+    /**
+     * 移动时，修正边界
+     */
+    private void fixBorderWhenTranslate() {
+
+        RectF matrxRectF = getMatrxRectF();
+        float deltaX = 0;
+        float deltaY = 0;
+
+        //上面留白
+        if (matrxRectF.top > 0 && isCheckTopAndBottom) {
+            deltaY = -matrxRectF.top;
+        }
+        //底部留白
+        if (matrxRectF.bottom < mViewHeight && isCheckTopAndBottom) {
+            deltaY = mViewHeight - matrxRectF.bottom;
+        }
+
+        //左边留白
+        if (matrxRectF.left > 0 && isCheckLeftAndRight) {
+            deltaX = -matrxRectF.left;
+        }
+
+        //右边留白
+        if (matrxRectF.right < mViewWidth && isCheckLeftAndRight) {
+            deltaX = mViewWidth - matrxRectF.right;
+        }
+
+        mMatrix.postTranslate(deltaX, deltaY);
     }
 
     /**
@@ -381,6 +432,6 @@ public class ZoomImageview extends ImageView implements ViewTreeObserver.OnGloba
      */
     private boolean canMove(float offsetX, float offsetY) {
 
-        return Math.sqrt(offsetX * offsetX + offsetY * offsetY) > mScaledTouchSlop;
+        return Math.sqrt((offsetX * offsetX) + (offsetY * offsetY)) > mScaledTouchSlop;
     }
 }
