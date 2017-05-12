@@ -18,4 +18,9 @@
         <attr name="passwordRadius" format="dimension"/>
     </declare-styleable>
 
+    <declare-styleable name="TagsLayout">
+        <attr name="tagVerticalSpace" format="dimension" />
+        <attr name="tagHorizontalSpace" format="dimension" />
+    </declare-styleable>
+
 </resources>

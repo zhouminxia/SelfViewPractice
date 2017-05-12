@@ -5,7 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.baibu.test.MainActivity">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     <Button
         android:id="@+id/enter"
@@ -97,4 +103,16 @@
         android:onClick="click"
         android:text="自动缩放Imageview" />
 
+    <Button
+        android:id="@+id/taglayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:onClick="click"
+        android:text="标签云" />
+
+
+    </LinearLayout>
+</ScrollView>
 </LinearLayout>

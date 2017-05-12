@@ -54,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent9 = new Intent(MainActivity.this, ZoomImageActivity.class);
                 startActivity(intent9);
                 break;
+            case R.id.taglayout:
+                Intent intent10 = new Intent(MainActivity.this, TagLayoutActivity.class);
+                startActivity(intent10);
+                break;
         }
     }
 
