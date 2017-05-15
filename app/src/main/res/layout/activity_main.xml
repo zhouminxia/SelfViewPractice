@@ -111,6 +111,14 @@
         android:layout_marginLeft="10dp"
         android:onClick="click"
         android:text="标签云" />
+    <Button
+        android:id="@+id/taglayout_my"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:onClick="click"
+        android:text="标签云模仿" />
 
 
     </LinearLayout>

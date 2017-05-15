@@ -59,8 +59,8 @@ public class TagLayout extends ViewGroup {
         int parentModeWidth = MeasureSpec.getMode(widthMeasureSpec);
         int parentModeHeight = MeasureSpec.getMode(heightMeasureSpec);
         // 如果是warp_content情况下，记录宽和高
-        int width = 0;
-        int height = 0;
+        int wrapWidth = 0;
+        int wrapHeight = 0;
         /**
          * 记录每一行的宽度，width不断取最大宽度
          */
@@ -71,8 +71,8 @@ public class TagLayout extends ViewGroup {
         int lineHeight = 0;
 
         int count = getChildCount();
-        int left = getPaddingLeft();
-        int top = getPaddingTop();
+        int parentPaddingLeft = getPaddingLeft();
+        int parentPaddingTop = getPaddingTop();
         // 遍历每个子元素
         for (int i = 0; i < count; i++) {
             View child = getChildAt(i);
@@ -87,28 +87,28 @@ public class TagLayout extends ViewGroup {
             // 当前子空间实际占据的高度
             int childHeight = child.getMeasuredHeight() + lp.topMargin + lp.bottomMargin + childVerticalSpace;
             /**
-             * 如果加入当前child，则超出最大宽度，则的到目前最大宽度给width，类加height 然后开启新行
+             * 如果加入当前child，则超出最大宽度，则的到目前最大宽度给width，累加height 然后开启新行
              */
             if (lineWidth + childWidth > parentSizeWidth - getPaddingLeft() - getPaddingRight()) {
-                width = Math.max(lineWidth, childWidth);// 取最大的
+                wrapWidth = Math.max(lineWidth, childWidth);// 取最大的
                 lineWidth = childWidth; // 重新开启新行，开始记录
                 // 叠加当前高度，
-                height += lineHeight;
+                wrapHeight += lineHeight;
                 // 开启记录下一行的高度
                 lineHeight = childHeight;
-                child.setTag(new Location(left, top + height, childWidth + left - childHorizontalSpace, height + child.getMeasuredHeight() + top));
+                child.setTag(new Location(parentPaddingLeft, parentPaddingTop + wrapHeight, childWidth + parentPaddingLeft - childHorizontalSpace, wrapHeight + child.getMeasuredHeight() + parentPaddingTop));
             } else {// 否则累加值lineWidth,lineHeight取最大高度
-                child.setTag(new Location(lineWidth + left, top + height, lineWidth + childWidth - childHorizontalSpace + left, height + child.getMeasuredHeight() + top));
+                child.setTag(new Location(lineWidth + parentPaddingLeft, parentPaddingTop + wrapHeight, lineWidth + childWidth - childHorizontalSpace + parentPaddingLeft, wrapHeight + child.getMeasuredHeight() + parentPaddingTop));
                 lineWidth += childWidth;
                 lineHeight = Math.max(lineHeight, childHeight);
             }
         }
-        width = Math.max(width, lineWidth) + getPaddingLeft() + getPaddingRight();
-        height += lineHeight;
+        wrapWidth = Math.max(wrapWidth, lineWidth) + getPaddingLeft() + getPaddingRight();
+        wrapHeight += lineHeight;
         parentSizeHeight += getPaddingTop() + getPaddingBottom();
-        height += getPaddingTop() + getPaddingBottom();
+        wrapHeight += getPaddingTop() + getPaddingBottom();
         //EXACTLY父容器已经为子容器设置了尺寸,子容器应当服从这些边界,不论子容器想要多大的空间.
-        setMeasuredDimension((parentModeWidth == MeasureSpec.EXACTLY) ? parentSizeWidth : width, (parentModeHeight == MeasureSpec.EXACTLY) ? parentSizeHeight : height);
+        setMeasuredDimension((parentModeWidth == MeasureSpec.EXACTLY) ? parentSizeWidth : wrapWidth, (parentModeHeight == MeasureSpec.EXACTLY) ? parentSizeHeight : wrapHeight);
     }
 
     @Override

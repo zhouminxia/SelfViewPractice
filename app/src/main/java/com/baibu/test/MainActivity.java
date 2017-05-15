@@ -58,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent10 = new Intent(MainActivity.this, TagLayoutActivity.class);
                 startActivity(intent10);
                 break;
+            case R.id.taglayout_my:
+                Intent intent11 = new Intent(MainActivity.this, MyTagLayoutActivity.class);
+                startActivity(intent11);
+                break;
         }
     }
 
