@@ -36,6 +36,7 @@
         <activity android:name=".ZoomImageActivity" />
         <activity android:name=".TagLayoutActivity" />
         <activity android:name=".MyTagLayoutActivity" />
+        <activity android:name=".view.MyHuiTanActivity" />
 
     </application>
 

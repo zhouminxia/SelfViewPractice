@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.baibu.test.view.MyHuiTanActivity;
+
 public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_IMAGE = 112;
     public static final int REQUEST_SCAN = 110;
@@ -61,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.taglayout_my:
                 Intent intent11 = new Intent(MainActivity.this, MyTagLayoutActivity.class);
                 startActivity(intent11);
+                break;
+            case R.id.huitan:
+                Intent intent12 = new Intent(MainActivity.this, MyHuiTanActivity.class);
+                startActivity(intent12);
                 break;
         }
     }
