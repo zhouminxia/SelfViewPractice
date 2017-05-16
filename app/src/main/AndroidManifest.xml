@@ -37,6 +37,8 @@
         <activity android:name=".TagLayoutActivity" />
         <activity android:name=".MyTagLayoutActivity" />
         <activity android:name=".view.MyHuiTanActivity" />
+        <activity android:name=".HuadongOneActivity" />
+        <activity android:name=".HuadongTwoActivity" />
 
     </application>
 

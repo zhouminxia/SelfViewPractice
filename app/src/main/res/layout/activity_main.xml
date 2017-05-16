@@ -5,130 +5,167 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.baibu.test.MainActivity">
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/enter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="10dp"
-        android:onClick="click"
-        android:text="进入扫描页面" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="10dp"
-        android:onClick="click"
-        android:text="相册" />
-
-    <Button
-        android:id="@+id/zhizhu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="10dp"
-        android:onClick="click"
-        android:text="zhizhu" />
-
-    <Button
-        android:id="@+id/bezi_one"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="10dp"
-        android:onClick="click"
-        android:text="贝塞尔曲线一" />
-
-    <Button
-        android:id="@+id/bezi_two"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="10dp"
-        android:onClick="click"
-        android:text="贝塞尔曲二" />
-
-    <Button
-        android:id="@+id/bezi_three"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="10dp"
-        android:onClick="click"
-        android:text="贝塞尔曲三" />
-
-    <Button
-        android:id="@+id/bezi_four"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="10dp"
-        android:onClick="click"
-        android:text="箭头跟着走" />
-
-    <Button
-        android:id="@+id/path_one"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="10dp"
-        android:onClick="click"
-        android:text="搜索动态" />
-
-    <Button
-        android:id="@+id/path_one_me"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="10dp"
-        android:onClick="click"
-        android:text="搜索动态me" />
-
-    <Button
-        android:id="@+id/zoom_imageview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="10dp"
-        android:onClick="click"
-        android:text="自动缩放Imageview" />
-
-    <Button
-        android:id="@+id/taglayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="10dp"
-        android:onClick="click"
-        android:text="标签云" />
-    <Button
-        android:id="@+id/taglayout_my"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="10dp"
-        android:onClick="click"
-        android:text="标签云模仿" />
-    <Button
-        android:id="@+id/huitan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="10dp"
-        android:onClick="click"
-        android:text="向上回弹" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
 
-    </LinearLayout>
-</ScrollView>
+                <Button
+                    android:id="@+id/enter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:onClick="click"
+                    android:text="进入扫描页面" />
+
+                <Button
+                    android:id="@+id/photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:onClick="click"
+                    android:text="相册" />
+
+                <Button
+                    android:id="@+id/zhizhu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:onClick="click"
+                    android:text="zhizhu" />
+
+                <Button
+                    android:id="@+id/bezi_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:onClick="click"
+                    android:text="贝塞尔曲线一" />
+
+                <Button
+                    android:id="@+id/bezi_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:onClick="click"
+                    android:text="贝塞尔曲二" />
+
+                <Button
+                    android:id="@+id/bezi_three"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:onClick="click"
+                    android:text="贝塞尔曲三" />
+
+                <Button
+                    android:id="@+id/bezi_four"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:onClick="click"
+                    android:text="箭头跟着走" />
+
+                <Button
+                    android:id="@+id/path_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:onClick="click"
+                    android:text="搜索动态" />
+
+                <Button
+                    android:id="@+id/path_one_me"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:onClick="click"
+                    android:text="搜索动态me" />
+
+                <Button
+                    android:id="@+id/zoom_imageview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:onClick="click"
+                    android:text="自动缩放Imageview" />
+
+                <Button
+                    android:id="@+id/taglayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:onClick="click"
+                    android:text="标签云" />
+
+                <Button
+                    android:id="@+id/taglayout_my"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:onClick="click"
+                    android:text="标签云模仿" />
+
+                <Button
+                    android:id="@+id/huitan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:onClick="click"
+                    android:text="向上回弹" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+
+                <Button
+                    android:id="@+id/scroll_conflict_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:onClick="click"
+                    android:text="滑动冲突——方向不一致(没模拟成功)" />
+
+                <Button
+                    android:id="@+id/scroll_conflict_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:onClick="click"
+                    android:text="滑动冲突——方向一致" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

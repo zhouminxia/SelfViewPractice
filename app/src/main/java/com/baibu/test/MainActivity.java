@@ -68,6 +68,14 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent12 = new Intent(MainActivity.this, MyHuiTanActivity.class);
                 startActivity(intent12);
                 break;
+            case R.id.scroll_conflict_one:
+                Intent intent13 = new Intent(MainActivity.this, HuadongOneActivity.class);
+                startActivity(intent13);
+                break;
+            case R.id.scroll_conflict_two:
+                Intent intent14 = new Intent(MainActivity.this, HuadongTwoActivity.class);
+                startActivity(intent14);
+                break;
         }
     }
 
