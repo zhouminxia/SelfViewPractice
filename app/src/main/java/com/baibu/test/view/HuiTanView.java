@@ -20,7 +20,6 @@ import android.widget.ScrollView;
  * 第五步：在onInterceptTouchEvent方法的motion_move中，添加一个判断条件，当子childscrollview在顶部时，才给父亲拦截。
  */
 
-
 /*
 * 外部拦截法：外部拦截法是指点击事件先经过父容器的拦截处理，如果父容器需要处理此事件就进行拦截，如果不需要此事件就不拦截，
 * 这样就可以解决滑动冲突的问题。外部拦截法需要重写父容器的onInterceptTouchEvent()方法，在内部做相应的拦截即可。

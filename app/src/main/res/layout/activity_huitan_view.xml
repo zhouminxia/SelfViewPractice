@@ -22,7 +22,7 @@
             android:textSize="24sp" />
     </RelativeLayout>
 
-    <com.baibu.test.view.HuiTanView
+    <com.baibu.test.view.HuiTanView2
         android:id="@+id/image_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -48,7 +48,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="80dp"
-                        android:text="个人中心1"
+                        android:text="个人中心111111111111111"
                         android:textSize="20sp" />
 
 
@@ -243,5 +243,5 @@
                     android:background="@color/bg_gray"></View>
             </LinearLayout>
         </ScrollView>
-    </com.baibu.test.view.HuiTanView>
+    </com.baibu.test.view.HuiTanView2>
 </LinearLayout>
