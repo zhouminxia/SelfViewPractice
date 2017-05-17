@@ -25,9 +25,9 @@ public class HuadongTwoActivity extends AppCompatActivity {
         listView = (HDlistview) findViewById(R.id.listview);
         scrollView = (ScrollView) findViewById(R.id.scrollView);
 
-        String[] strs = new String[15];
+        String[] strs = new String[30];
 
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 30; i++) {
             strs[i] = "第" + (i + 1) + "条";
         }
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, strs);

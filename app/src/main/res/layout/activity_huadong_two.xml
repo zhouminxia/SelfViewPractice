@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.baibu.test.view.HDscrollviewTwo
+    <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -43,7 +43,8 @@
             <com.baibu.test.view.HDlistview
                 android:id="@+id/listview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></com.baibu.test.view.HDlistview>
+                android:layout_height="100dp"
+                android:background="@color/pink"></com.baibu.test.view.HDlistview>
 
 
             <RelativeLayout
@@ -58,7 +59,91 @@
                     android:text="个人中心2222"
                     android:textSize="20sp" />
             </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="80dp"
+                    android:text="个人中心2222"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="80dp"
+                    android:text="个人中心2222"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="80dp"
+                    android:text="个人中心2222"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="80dp"
+                    android:text="个人中心2222"
+                    android:textSize="20sp" />
+            </RelativeLayout> <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="80dp"
+                android:text="个人中心2222"
+                android:textSize="20sp" />
+        </RelativeLayout> <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="80dp"
+                android:text="个人中心2222"
+                android:textSize="20sp" />
+        </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="80dp"
+                    android:text="个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222个人中心2222"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+
+
 
         </LinearLayout>
-    </com.baibu.test.view.HDscrollviewTwo>
+    </ScrollView>
 </LinearLayout>
