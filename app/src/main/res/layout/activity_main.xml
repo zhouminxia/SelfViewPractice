@@ -165,6 +165,15 @@
                     android:layout_marginLeft="10dp"
                     android:onClick="click"
                     android:text="滑动冲突——方向一致" />
+
+                <Button
+                    android:id="@+id/viewflipper"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:onClick="click"
+                    android:text="上下滚动条" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

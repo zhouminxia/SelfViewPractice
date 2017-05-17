@@ -76,6 +76,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent14 = new Intent(MainActivity.this, HuadongTwoActivity.class);
                 startActivity(intent14);
                 break;
+            case R.id.viewflipper:
+                Intent intent15 = new Intent(MainActivity.this, HuadongXunhuanActivity.class);
+                startActivity(intent15);
+                break;
         }
     }
 

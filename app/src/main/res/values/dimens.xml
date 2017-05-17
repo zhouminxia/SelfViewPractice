@@ -5,4 +5,5 @@
 
     <dimen name="px_1">1px</dimen>
     <dimen name="common_margin_6">6dip</dimen>
+    <dimen name="common_margin_4">4dip</dimen>
 </resources>
