@@ -1,4 +1,4 @@
-package com.baibu.test.view;
+package com.baibu.test.view.scrollviews;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -18,11 +18,11 @@ public class HDscrollviewTwo extends ScrollView {
     private int nowY;
 
     public HDscrollviewTwo(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public HDscrollviewTwo(Context context, AttributeSet attrs) {
-        this(context, attrs,0);
+        this(context, attrs, 0);
     }
 
     public HDscrollviewTwo(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -31,7 +31,6 @@ public class HDscrollviewTwo extends ScrollView {
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
         View childAt = getChildAt(0);
         mListView = (ListView) childAt.findViewById(R.id.listview);
     }
@@ -49,13 +48,12 @@ public class HDscrollviewTwo extends ScrollView {
                 break;
             }
             case MotionEvent.ACTION_MOVE: {
-                if(mListView.getFirstVisiblePosition()==0
-                        && y>nowY){
+                if (mListView.getFirstVisiblePosition() == 0
+                        && y > nowY) {
                     intercepted = true;
                     break;
-                }
-                else if(mListView.getLastVisiblePosition()==mListView.getCount()-1
-                        && y<nowY){
+                } else if (mListView.getLastVisiblePosition() == mListView.getCount() - 1
+                        && y < nowY) {
                     intercepted = true;
                     break;
                 }
