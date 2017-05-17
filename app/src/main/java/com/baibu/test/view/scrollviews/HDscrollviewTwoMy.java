@@ -37,49 +37,49 @@ public class HDscrollviewTwoMy extends ScrollView {
     }
 
     //外部拦截法
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
-        boolean isIntercept = false;
-        int downY = (int) ev.getY();
-        switch (ev.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                lastY = downY;
-                isIntercept = super.onInterceptTouchEvent(ev);
-                break;
-            case MotionEvent.ACTION_MOVE:
-
-                //优化。当第一个或最后一个出来一点点，scrollview也会拦截
-//                //Lisstview第一个，并且还下滑；
-                if ((isTop(listview)) && (downY - lastY > 0)) {
-                    isIntercept = true;
-                    break;
-                }
-
-                //listview最后一个，还上滑动
-                else if ((isBottom(listview)) && (downY - lastY < 0)) {
-                    isIntercept = true;
-                    break;
-                }
-//                if ((listview.getFirstVisiblePosition() == 0) && (downY - lastY > 0)) {
+//    @Override
+//    public boolean onInterceptTouchEvent(MotionEvent ev) {
+//        boolean isIntercept = false;
+//        int downY = (int) ev.getY();
+//        switch (ev.getAction()) {
+//            case MotionEvent.ACTION_DOWN:
+//                lastY = downY;
+//                isIntercept = super.onInterceptTouchEvent(ev);
+//                break;
+//            case MotionEvent.ACTION_MOVE:
+//
+//                //优化。当第一个或最后一个出来一点点，scrollview也会拦截
+////                //Lisstview第一个，并且还下滑；
+//                if ((isTop(listview)) && (downY - lastY > 0)) {
 //                    isIntercept = true;
 //                    break;
 //                }
 //
 //                //listview最后一个，还上滑动
-//                else if ((listview.getLastVisiblePosition() == listview.getCount() - 1) && (downY - lastY < 0)) {
+//                else if ((isBottom(listview)) && (downY - lastY < 0)) {
 //                    isIntercept = true;
 //                    break;
 //                }
-                isIntercept = false;
-                break;
-            case MotionEvent.ACTION_UP:
-                isIntercept = false;
-                break;
-            default:
-                break;
-        }
-        return isIntercept;
-    }
+////                if ((listview.getFirstVisiblePosition() == 0) && (downY - lastY > 0)) {
+////                    isIntercept = true;
+////                    break;
+////                }
+////
+////                //listview最后一个，还上滑动
+////                else if ((listview.getLastVisiblePosition() == listview.getCount() - 1) && (downY - lastY < 0)) {
+////                    isIntercept = true;
+////                    break;
+////                }
+//                isIntercept = false;
+//                break;
+//            case MotionEvent.ACTION_UP:
+//                isIntercept = false;
+//                break;
+//            default:
+//                break;
+//        }
+//        return isIntercept;
+//    }
 
 
     /**
@@ -112,5 +112,14 @@ public class HDscrollviewTwoMy extends ScrollView {
         return result;
     }
 
-
+    //内部拦截发
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        int action = ev.getAction();
+        if (MotionEvent.ACTION_DOWN == action) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
