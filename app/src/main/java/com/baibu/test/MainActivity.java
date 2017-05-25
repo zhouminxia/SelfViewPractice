@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.baibu.test.uiactivity.MyMvpActivity;
+import com.baibu.test.uiactivity.MyMvpActivityOne;
 import com.baibu.test.view.MyHuiTanActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -82,7 +82,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent15);
                 break;
             case R.id.mvp_mode:
-                Intent intent16 = new Intent(MainActivity.this, MyMvpActivity.class);
+//                Intent intent16 = new Intent(MainActivity.this, MyMvpActivity.class);
+                Intent intent16 = new Intent(MainActivity.this, MyMvpActivityOne.class);
                 startActivity(intent16);
                 break;
         }

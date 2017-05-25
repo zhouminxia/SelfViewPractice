@@ -41,6 +41,7 @@
         <activity android:name=".HuadongTwoActivity" />
         <activity android:name=".HuadongXunhuanActivity" />
         <activity android:name=".uiactivity.MyMvpActivity" />
+        <activity android:name=".uiactivity.MyMvpActivityOne" />
 
     </application>
 
