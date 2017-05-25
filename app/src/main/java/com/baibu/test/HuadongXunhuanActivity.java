@@ -14,6 +14,11 @@ public class HuadongXunhuanActivity extends AppCompatActivity {
     private ViewFlipper viewFlipper;
 
     @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_huadong_xunhuan);
@@ -25,5 +30,24 @@ public class HuadongXunhuanActivity extends AppCompatActivity {
         viewFlipper.addView(view1);
         viewFlipper.addView(view2);
         viewFlipper.addView(view3);
+
+
+        viewFlipper.post(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
+
+        //初始化initNum=0
+        ThreadLocal<Integer> initNum = new ThreadLocal<Integer>() {
+
+            @Override
+            protected Integer initialValue() {
+                return 0;
+            }
+        };
+
+
     }
 }

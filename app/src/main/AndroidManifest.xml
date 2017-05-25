@@ -40,6 +40,7 @@
         <activity android:name=".HuadongOneActivity" />
         <activity android:name=".HuadongTwoActivity" />
         <activity android:name=".HuadongXunhuanActivity" />
+        <activity android:name=".uiactivity.MyMvpActivity" />
 
     </application>
 
